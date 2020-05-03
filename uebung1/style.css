@@ -1,0 +1,16 @@
+body {
+color: green;
+background-color: black;
+font-family: "VCR OSD MONO";
+text-align: center;
+}
+li {
+  text-allign: center;
+}
+
+h1{
+  font-family: "VCR OSD MONO";
+}
+h3{
+  font-family: "Product Sans";
+}
