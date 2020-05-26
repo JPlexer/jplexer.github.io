@@ -5,7 +5,7 @@ body {
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     font-family: 'Verdana', sans-serif;
-background-image:url('https://i.pinimg.com/originals/bb/53/d3/bb53d32ed63407d83aa8fd548804f59d.jpg') no-repeat;
+background:url('https://i.pinimg.com/originals/bb/53/d3/bb53d32ed63407d83aa8fd548804f59d.jpg') no-repeat;
   background-position: center top;
   background-size: cover;
   margin: 0;
