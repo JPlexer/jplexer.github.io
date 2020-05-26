@@ -1,8 +1,17 @@
 const queryString = window.location.search;
-function encodeHTML(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+function sanitize(string) {
+  const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#x27;',
+      "/": '&#x2F;',
+  };
+  const reg = /[&<>"'/]/ig;
+  return string.replace(reg, (match)=>(map[match]));
 }
-const sanitized = encodeHTML(queryString);
+const sanitized = sanitize(queryString);
 const urlParams = new URLSearchParams(sanitized);
 const name = urlParams.get('name')
 const lang = urlParams.get('lang')
