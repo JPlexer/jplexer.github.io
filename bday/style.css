@@ -6,6 +6,7 @@ body {
     transform: translateX(-50%) translateY(-50%);
     font-family: 'Verdana', sans-serif;
 background:url('https://i.pinimg.com/originals/bb/53/d3/bb53d32ed63407d83aa8fd548804f59d.jpg') no-repeat;
+  height: 100%;
   background-position: center top;
   background-size: cover;
   margin: 0;
@@ -14,4 +15,8 @@ background:url('https://i.pinimg.com/originals/bb/53/d3/bb53d32ed63407d83aa8fd54
                 1px -1px 1px black,
                 -1px  1px 1px black,
                 -1px -1px 1px black;
+}
+
+html { 
+height: 100%;
 }
