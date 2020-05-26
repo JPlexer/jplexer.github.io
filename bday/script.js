@@ -7,7 +7,7 @@ function appendHtml(targetC, htmldata) {
     theDiv.innerHTML = htmldata;
 }
 
-if(name.match(/^[0-9a-zA-Z]{1,16}$/)){
+if(name.match(/^[0-9a-zA-Z!&]{1,16}$/)){
 if (lang === "de") {
 	appendHtml('mess', "Alles Gute zum Geburtstag");
 }
