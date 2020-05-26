@@ -1,25 +1,20 @@
 const queryString = window.location.search;
-function sanitize(string) {
-  const map = {
-      '&': 'and',
-      '<': 'less then',
-      '>': 'greater then',
-      '"': 'double quote;',
-      "'": 'single quote;',
-      "/": 'backslash',
-  };
-  const reg = /[&<>"'/]/ig;
-  return string.replace(reg, (match)=>(map[match]));
-}
-const sanitized = sanitize(queryString);
-const urlParams = new URLSearchParams(sanitized);
+const urlParams = new URLSearchParams(queryString);
 const name = urlParams.get('name')
 const lang = urlParams.get('lang')
 function appendHtml(targetC, htmldata) {
     var theDiv = document.getElementById(targetC);
     theDiv.innerHTML = htmldata;
 }
+
+if(id.match(/^[0-9a-zA-Z]{1,16}$/)){
 if (lang === "de") {
 	appendHtml('mess', "Alles Gute zum Geburtstag");
 }
 appendHtml('name', name + "!");
+
+}
+else{
+appendHtml('mess', "Nice Try!");
+    appendHtml('name', "XSS!");
+}
