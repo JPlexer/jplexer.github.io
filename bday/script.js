@@ -15,6 +15,6 @@ appendHtml('name', name + "!");
 
 }
 else{
-appendHtml('mess', "Nice Try!");
-appendHtml('name', "XSS!");
+appendHtml('mess', "That is not a name!");
+appendHtml('name', "lol!");
 }
