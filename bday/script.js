@@ -1,12 +1,12 @@
 const queryString = window.location.search;
 function sanitize(string) {
   const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#x27;',
-      "/": '&#x2F;',
+      '&': 'and',
+      '<': 'less then',
+      '>': 'greater then',
+      '"': 'double quote;',
+      "'": 'single quote;',
+      "/": 'backslash',
   };
   const reg = /[&<>"'/]/ig;
   return string.replace(reg, (match)=>(map[match]));
