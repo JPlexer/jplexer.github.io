@@ -1,6 +1,9 @@
 const queryString = window.location.search;
-console.log(queryString);
-const urlParams = new URLSearchParams(queryString);
+function encodeHTML(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+}
+const sanitized = encodeHTML(queryString);
+const urlParams = new URLSearchParams(sanitized);
 const name = urlParams.get('name')
 const lang = urlParams.get('lang')
 function appendHtml(targetC, htmldata) {
