@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let nextRandom = 0
     let timerId
     let score = 0
+    let speed = 1500
     const colors = [
         'blue',
         'lightgreen',
@@ -61,8 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const lrTetromino = [
         [1, width + 2, width * 2 + 2, 2],
         [width, width + 1, width + 2, width * 2],
-        [1, width + 1, width * 2 + 1, width * 2 +2],
-        [width+2, width * 2, width * 2 + 1, width * 2 + 2]
+        [1, width + 1, width * 2 + 1, width * 2 + 2],
+        [width + 2, width * 2, width * 2 + 1, width * 2 + 2]
     ]
 
     const theTetrominos = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino, zrTetromino, lrTetromino]
@@ -92,39 +93,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //control
     function control(e) {
-        if (e.keyCode === 37) {
-            moveLeft()
-        } else if (e.keyCode === 38) {
-            rotate()
-        } else if (e.keyCode === 39) {
-            moveRight()
-        } else if (e.keyCode === 40) {
-            moveDown()
+        if (timerId) {
+            if (e.keyCode === 37) {
+                moveLeft()
+            } else if (e.keyCode === 38) {
+                rotate()
+            } else if (e.keyCode === 39) {
+                moveRight()
+            } else if (e.keyCode === 40) {
+                moveDown()
+            }
         }
+
     }
     document.addEventListener('keydown', control)
 
     //down function
     function moveDown() {
+        if (current.some(index => squares[currentPosition + index + width].classList.contains('taken')) || current.some(index => squares[currentPosition + index + width].classList.contains('takend'))) {
+        } else {
         undraw()
         currentPosition += width
         draw()
         freeze()
     }
+}
 
     //freeze funktion
     function freeze() {
-        if (current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
-            current.forEach(index => squares[currentPosition + index].classList.add('taken'))
+        if (current.some(index => squares[currentPosition + index + width].classList.contains('taken')) || current.some(index => squares[currentPosition + index + width].classList.contains('takend'))) {
+            clearInterval(timerId)
+            setTimeout(function(){timerId = setInterval(moveDown, speed)
+                current.forEach(index => squares[currentPosition + index].classList.add('taken'))
                 //neu auswählen
-            random = nextRandom
-            nextRandom = Math.floor(Math.random() * theTetrominos.length)
-            current = theTetrominos[random][currentRotation]
-            currentPosition = 4
-            draw()
-            displayShape()
-            addScore()
-            gameOver()
+                random = nextRandom
+                nextRandom = Math.floor(Math.random() * theTetrominos.length)
+                current = theTetrominos[random][currentRotation]
+                currentPosition = 4
+                draw()
+                displayShape()
+                addScore()
+                gameOver()
+            
+            
+            }, 1000);
+            
         }
     }
 
@@ -152,28 +165,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Drehen
     function isAtRight() {
-        return current.some(index=> (currentPosition + index + 1) % width === 0)  
-      }
-      
-      function isAtLeft() {
-        return current.some(index=> (currentPosition + index) % width === 0)
-      }
-      
-      function checkRotatedPosition(P){
-        P = P || currentPosition       //get current position.  Then, check if the piece is near the left side.
-        if ((P+1) % width < 4) {         //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
-          if (isAtRight()){            //use actual position to check if it's flipped over to right side
-            currentPosition += 1    //if so, add one to wrap it back around
-            checkRotatedPosition(P) //check again.  Pass position from start, since long block might need to move more.
+        return current.some(index => (currentPosition + index + 1) % width === 0)
+    }
+
+    function isAtLeft() {
+        return current.some(index => (currentPosition + index) % width === 0)
+    }
+
+    function checkRotatedPosition(P) {
+        P = P || currentPosition //get current position.  Then, check if the piece is near the left side.
+        if ((P + 1) % width < 4) { //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
+            if (isAtRight()) { //use actual position to check if it's flipped over to right side
+                currentPosition += 1 //if so, add one to wrap it back around
+                checkRotatedPosition(P) //check again.  Pass position from start, since long block might need to move more.
+            }
+        } else if (P % width > 5) {
+            if (isAtLeft()) {
+                currentPosition -= 1
+                checkRotatedPosition(P)
             }
         }
-        else if (P % width > 5) {
-          if (isAtLeft()){
-            currentPosition -= 1
-          checkRotatedPosition(P)
-          }
-        }
-      }
+    }
 
     function rotate() {
         undraw()
@@ -222,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timerId = null
         } else {
             draw()
-            timerId = setInterval(moveDown, 1000)
+            timerId = setInterval(moveDown, speed)
             nextRandom = Math.floor(Math.random() * theTetrominos.length)
             displayShape()
         }
@@ -231,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //score
     function addScore() {
         for (let i = 0; i < 199; i += width) {
-            const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9]
+            const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9]
 
             if (row.every(index => squares[index].classList.contains('taken'))) {
                 score += 10
@@ -244,6 +256,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 const squaresRemoved = squares.splice(i, width)
                 squares = squaresRemoved.concat(squares)
                 squares.forEach(cell => grid.appendChild(cell))
+                checkScore();
+            }
+        }
+    }
+
+    //check score/speed
+
+    function checkScore() {
+        if (score % 100 === 0) {
+            if (speed < 200) {
+                speed = 200
+                clearInterval(timerId)
+                timerId = setInterval(moveDown, speed)
+            } else {
+                speed = speed - 50
+                clearInterval(timerId)
+                timerId = setInterval(moveDown, speed)
             }
         }
     }
@@ -251,9 +280,10 @@ document.addEventListener('DOMContentLoaded', () => {
     //game over
 
     function gameOver() {
-        if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-            scoreDisplay.innerHTML = 'Game Over'
+        if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            scoreDisplay.innerHTML = score + ' (Game Over)'
             clearInterval(timerId)
+            timerId = null
         }
     }
 
