@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <style>
+            @import url('http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext');
+            body {
+                transform: scale(1.0);
+                font-family: Lato;
+                text-align: center;
+                }
+            </style>
+            <title>Polybius Solver</title>
+    </head>
+<body>
+
+<h1>Polybius Solver</h1>
+<p>Gib deinen Text ein und drücke den Knopf um etwas zu lösen, oder zu verschlüsseln (Leerzeichen nach jedem Buchstabe)</p>
+  <input id="poot" type="text"><br>
+  <input type="button" onclick="poootis(poot.value)" value="Ent/Verschlüsseln">
+<p id="test"></p>
+<script>
+function poootis(ea) {
+var stringg = ea;
+var encodeA = stringg.replace(/[Aa]/g, "11 ");
+var encodeB = encodeA.replace(/[Bb]/g, "12 ");
+var encodeC = encodeB.replace(/[Cc]/g, "13 ");
+var encodeD = encodeC.replace(/[Dd]/g, "14 ");
+var encodeE = encodeD.replace(/[Ee]/g, "15 ");
+var encodeF = encodeE.replace(/[Ff]/g, "21 ");
+var encodeG = encodeF.replace(/[Gg]/g, "22 ");
+var encodeH = encodeG.replace(/[Hh]/g, "23 ");
+var encodeI = encodeH.replace(/[IiJj]/g, "24 ");
+var encodeK = encodeI.replace(/[Kk]/g, "25 ");
+var encodeL = encodeK.replace(/[Ll]/g, "31 ");
+var encodeM = encodeL.replace(/[Mm]/g, "32 ");
+var encodeN = encodeM.replace(/[Nn]/g, "33 ");
+var encodeO = encodeN.replace(/[Oo]/g, "34 ");
+var encodeP = encodeO.replace(/[Pp]/g, "35 ");
+var encodeQ = encodeP.replace(/[Qq]/g, "41 ");
+var encodeR = encodeQ.replace(/[Rr]/g, "42 ");
+var encodeS = encodeR.replace(/[Ss]/g, "43 ");
+var encodeT = encodeS.replace(/[Tt]/g, "44 ");
+var encodeU = encodeT.replace(/[Uu]/g, "45 ");
+var encodeV = encodeU.replace(/[Vv]/g, "51 ");
+var encodeW = encodeV.replace(/[Ww]/g, "52 ");
+var encodeX = encodeW.replace(/[Xx]/g, "53 ");
+var encodeY = encodeX.replace(/[Yy]/g, "54 ");
+var encodeZ = encodeY.replace(/[Zz]/g, "55 ");
+if(encodeZ != stringg){
+    document.getElementById("test").innerHTML = encodeZ;
+    console.log(encodeZ)
+} else {
+    var decodeA = stringg.replace(/(11 )|(11)/g, "A");
+    var decodeB = decodeA.replace(/(12 )|(12)/g, "B");
+    var decodeC = decodeB.replace(/(13 )|(13)/g, "C");
+    var decodeD = decodeC.replace(/(14 )|(14)/g, "D");
+    var decodeE = decodeD.replace(/(15 )|(15)/g, "E");
+    var decodeF = decodeE.replace(/(21 )|(21)/g, "F");
+    var decodeG = decodeF.replace(/(22 )|(22)/g, "G");
+    var decodeH = decodeG.replace(/(23 )|(23)/g, "H");
+    var decodeI = decodeH.replace(/(24 )|(24)/g, "I");
+    var decodeK = decodeI.replace(/(25 )|(25)/g, "K");
+    var decodeL = decodeK.replace(/(31 )|(31)/g, "L");
+    var decodeM = decodeL.replace(/(32 )|(32)/g, "M");
+    var decodeN = decodeM.replace(/(33 )|(33)/g, "N");
+    var decodeO = decodeN.replace(/(34 )|(34)/g, "O");
+    var decodeP = decodeO.replace(/(35 )|(35)/g, "P");
+    var decodeQ = decodeP.replace(/(41 )|(41)/g, "Q");
+    var decodeR = decodeQ.replace(/(42 )|(42)/g, "R");
+    var decodeS = decodeR.replace(/(43 )|(43)/g, "S");
+    var decodeT = decodeS.replace(/(44 )|(44)/g, "T");
+    var decodeU = decodeT.replace(/(45 )|(45)/g, "U");
+    var decodeV = decodeU.replace(/(51 )|(51)/g, "V");
+    var decodeW = decodeV.replace(/(52 )|(52)/g, "W");
+    var decodeX = decodeW.replace(/(53 )|(53)/g, "X");
+    var decodeY = decodeX.replace(/(54 )|(54)/g, "Y");
+    var decodeZ = decodeY.replace(/(55 )|(55)/g, "Z");
+    document.getElementById("test").innerHTML = decodeZ;
+    console.log(decodeZ)
+}
+}
+</script>
+
+</body>
+</html>
