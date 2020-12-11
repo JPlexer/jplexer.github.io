@@ -1,0 +1,219 @@
+<html>
+
+<head>
+    <link href='lato.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <title>New Tab</title>
+    <meta charset="utf-8" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            position: relative;
+        }
+
+        .aaa {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            height: 100%;
+            background-image: url(https://source.unsplash.com/1920x1080/?nature);
+            color: white;
+            font-family: Lato;
+            overflow: hidden;
+        }
+
+        span {
+            font-size: 700%;
+        }
+
+        h1 {
+            font-size: 200%;
+        }
+        
+
+        input, button {
+            color: #fff;
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 10px;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        input[type=text] {
+            background: transparent;
+            width: 100%;
+        }
+
+        input:focus {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        input:hover, button:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .ui-autocomplete {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            float: left;
+            display: none;
+            min-width: 160px;
+            padding: 4px 0;
+            margin: 0 0 10px 25px;
+            list-style: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            font-size: 20px;
+        }
+
+        .ui-menu-item>a.ui-corner-all {
+
+            display: block;
+            padding: 3px 15px;
+            clear: both;
+            font-weight: normal;
+            line-height: 18px;
+            color: #555555;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .ui-state-hover,
+        .ui-state-active {
+            color: #ffffff;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 1);
+            border-radius: 0px;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            background-image: none;
+        }
+        .searchbox {
+            width: 500px;
+    overflow: hidden;
+}
+.first {
+    width: 300px;
+    float:left; /* add this */
+}
+button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: #fff;
+}
+.second {
+    
+    font-size: 16px;
+    overflow: hidden;
+}
+    </style>
+</head>
+
+<body>
+    <div class="aaa">
+        <div class="text">
+            <span id="Clockk" class="clock" onload="showTime()"></span>
+        </div>
+        <div class="searchh">
+            <form autocomplete="off" action="https://google.com/search?">
+                <div class="search-box">
+                    <div class="first"> <input class="search-txt"id="myInput" type="text" name="q" placeholder="Search"></div>
+                   <div class="second"><button id="submitbutton" type="submit"><a class="search-btn">
+                    <i class="fas fa-search"></i>
+                </a></button></div>
+                </div>
+            </form>
+            <div class="text">
+                <h1 id="message">Hey!</h1>
+            </div>
+            
+        </div>
+        
+    </div>
+</body>
+<script>
+    const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const message = urlParams.get('name')
+function appendHtml(targetC, htmldata) {
+    var theDiv = document.getElementById(targetC);
+    theDiv.innerHTML = htmldata;
+}
+if(message.match(/^[0-9a-zA-Z?&]{1,16}$/)){
+    appendHtml('message', "Hey " + message + "!");
+}
+    var suggestCallBack; // global var for autocomplete jsonp
+
+    $(document).ready(function () {
+        $("#myInput").autocomplete({
+            source: function (request, response) {
+                $.getJSON("http://suggestqueries.google.com/complete/search?callback=?", {
+                    "jsonp": "suggestCallBack", // jsonp callback function name
+                    "q": request.term, // query term
+                    "client": "youtube" // force youtube style response, i.e. jsonp
+                });
+                suggestCallBack = function (data) {
+                    var suggestions = [];
+                    $.each(data[1], function (key, val) {
+                        suggestions.push({
+                            "value": val[0]
+                        });
+                    });
+                    //suggestions.length = 5; // prune suggestions list to only 5 items
+                    response(suggestions);
+                };
+            },
+        });
+    });
+
+    function showTime() {
+        var date = new Date();
+        var h = date.getHours(); // 0 - 23
+        var m = date.getMinutes(); // 0 - 59
+        var s = date.getSeconds(); // 0 - 59
+
+        h = (h < 10) ? "0" + h : h;
+        m = (m < 10) ? "0" + m : m;
+        s = (s < 10) ? "0" + s : s;
+
+        var time = h + ":" + m + ":" + s + " ";
+        document.getElementById("Clockk").innerText = time;
+        document.getElementById("Clockk").textContent = time;
+
+        setTimeout(showTime, 1000);
+
+    }
+
+    showTime();
+</script>
+
+</html>
