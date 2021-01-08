@@ -1,10 +1,10 @@
 {
   "name": "AnimeGlare",
-  "identifier": "com.blackknit.animeglare",
+  "identifier": "com.black.animeglare",
   "apps": [
     {
       "name": "AnimeGlare",
-      "bundleIdentifier": "com.blackknit.animeglare",
+      "bundleIdentifier": "com.black.animeglare",
       "developerName": "Blackknit",
       "subtitle": "An anime app",
       "version": "3.0.1rc31",
