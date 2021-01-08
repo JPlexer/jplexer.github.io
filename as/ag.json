@@ -1,9 +1,9 @@
 {
-  "name": "Animeglare",
+  "name": "AnimeGlare",
   "identifier": "com.blackknit.animeglare",
   "apps": [
     {
-      "name": "Animeglare",
+      "name": "AnimeGlare",
       "bundleIdentifier": "com.blackknit.animeglare",
       "developerName": "Blackknit",
       "subtitle": "An anime app",
@@ -24,10 +24,10 @@
   ],
   "news": [
     {
-      "title": "Animeglare Source is now Avaliable!",
+      "title": "AnimeGlare Source is now Avaliable!",
       "identifier": "welcome-to-animeglare",
       "caption": "Please support the creators of Animeglare!",
-      "tintColor": "018084",
+      "tintColor": "F55255",
       "url": "https://animeglare.xyz",
       "date": "2021-01-07",
       "notify": false
