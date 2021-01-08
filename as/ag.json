@@ -8,7 +8,7 @@
       "developerName": "Blackknit",
       "subtitle": "An anime app",
       "version": "3.0.1rc31",
-      "versionDate": "2021-01-08T15:30:00-07:00",
+      "versionDate": "2021-01-07T15:30:00-07:00",
       "versionDescription": "As a present from the AnimeGlare development team, we are releasing a new build to improve stability and provide our users with more links, sub or dub.",
       "downloadURL": "https://downloads.animeglare.xyz/download/AnimeGlare-3.0.1-rc31.ipa",
       "localizedDescription": "An anime app that let's you keep track of all your watched anime and connect to multiple tracking websites and sync your watch history.",
@@ -29,7 +29,7 @@
       "caption": "Please support the creators of Animeglare!",
       "tintColor": "018084",
       "url": "https://animeglare.xyz",
-      "date": "2021-01-08",
+      "date": "2021-01-07",
       "notify": false
     }
   ]
